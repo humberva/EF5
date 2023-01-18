@@ -1485,6 +1485,8 @@ void Simulator::SimulateDistributed(bool trackPeaks) {
        }
        }*/
 
+      // ----- GRIDDED OUTPUTS block -----
+      // First, process timestep-based outputs
       if (griddedOutputs != OG_NONE) {
         currentTimeTextOutput.UpdateName(currentTime.GetTM());
       }
@@ -1591,6 +1593,7 @@ void Simulator::SimulateDistributed(bool trackPeaks) {
 
   tm *ctWE = warmEndTime.GetTM();
 
+  // Now, process simulation-integrated quantities (Max. values)
   // Hard coded event counting
   if (outputRP && ((griddedOutputs & OG_MAXQRP) == OG_MAXQRP)) {
 
@@ -1643,6 +1646,21 @@ void Simulator::SimulateDistributed(bool trackPeaks) {
       currentDepth[i] = val;
     }
     sprintf(buffer, "%s/maxunitq.%04i%02i%02i.%02i%02i%02i.tif", outputPath,
+            ctWE->tm_year + 1900, ctWE->tm_mon + 1, ctWE->tm_mday,
+            ctWE->tm_hour, ctWE->tm_min, ctWE->tm_sec);
+    gridWriter.WriteGrid(&nodes, &currentDepth, buffer, false);
+  }
+
+  // Maximum inundation depth: added 01/18/2023 by HV
+  if ((griddedOutputs & OG_MAXDEPTH) == OG_MAXDEPTH) {
+    // Compute inundation based on max Q
+    iModel->Inundation(&maxGrid, &currentDepth);
+    for (size_t i = 0; i < currentQ.size(); i++) {
+      // Rounding off: how many decimals?
+      float val = floorf(currentDepth[i] * 10.0f + 0.5f) / 10.0f;
+      currentDepth[i] = val;
+    }
+    sprintf(buffer, "%s/maxdepth.%04i%02i%02i.%02i%02i%02i.tif", outputPath,
             ctWE->tm_year + 1900, ctWE->tm_mon + 1, ctWE->tm_mday,
             ctWE->tm_hour, ctWE->tm_min, ctWE->tm_sec);
     gridWriter.WriteGrid(&nodes, &currentDepth, buffer, false);

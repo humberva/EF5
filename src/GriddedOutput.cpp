@@ -23,8 +23,10 @@ const char *GriddedOutputText[] = {
     "maxthresholdexceedance",
     "maxthresholdexceedancep",
     "precipaccum",
+    "maxwaterdepth",
 };
 
+// Added MAXDEPTH option: 01/18/2023 by HV
 const int GriddedOutputFlags[] = {
     0,
     1,
@@ -45,4 +47,5 @@ const int GriddedOutputFlags[] = {
     OG_MAXTHRES,
     OG_MAXTHRESP,
     OG_PRECIPACCUM,
+    OG_MAXDEPTH,
 };
