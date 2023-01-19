@@ -24,7 +24,7 @@ enum SUPPORTED_OUTPUT_GRIDS {
   OG_MAXDEPTH = 262144,
 };
 
-#define OG_QTY 19
+#define OG_QTY 20
 
 extern const char *GriddedOutputText[];
 extern const int GriddedOutputFlags[];
