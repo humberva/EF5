@@ -23,7 +23,7 @@ const char *GriddedOutputText[] = {
     "maxthresholdexceedance",
     "maxthresholdexceedancep",
     "precipaccum",
-    "maxwaterdepth",
+    "maxinundation",
 };
 
 // Added MAXDEPTH option: 01/18/2023 by HV

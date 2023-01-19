@@ -384,14 +384,14 @@ PLWHC=0.093812
 SCF=2.219492
           </pre><p class="prec">Example Snow17ParamSet Block</p>
           <span class="namec">GAUGE:</span> This is the name of the gauge location block for which the parameters that follow it will be applied.<br />
-          <span class="namec">UADJ:</span> The number of grid cells needed to flow into a cell for it to be declared a channel grid cell.<br />
-          <span class="namec">MBASE:</span> The interflow flow speed multiplier<br />
-          <span class="namec">MFMAX:</span> The amount of water leaked out of the interflow reservoir at each time step. Ranges between 0 and 1.<br />
-          <span class="namec">MFMIN:</span> The initial value of the interflow reservoir.<br />
-          <span class="namec">TIPM:</span> The multiplier in Q = alpha*A<sup>beta</sup> used for channel routing<br />
-          <span class="namec">NMF:</span> The exponent in Q = alpha*A<sup>beta</sup> used for channel routing<br />
-          <span class="namec">PLWHC:</span> The Alpha value used for overland routing.<br />
-          <span class="namec">SCF:</span> The Alpha value used for overland routing.<br /><br />
+          <span class="namec">UADJ:</span> Average wind function during rain on snow (mm/mb) - 0.04 value for the American River Basin from Shamir & Georgakakos 2007.<br />
+          <span class="namec">MBASE:</span> Base temperature above which melt typically occurs (deg C) - ****must be greater than 0 deg C****- value of 1 for the American River Basin from Shamir & Georgakakos 2007.<br />
+          <span class="namec">MFMAX:</span> Maximum melt factor during non-rain periods (mm/deg C 6 hr) - in western facing slope assumed to occur on June 21 - value of 1.05 for the American River Basin from Shamir & Georgakakos 2007.<br />
+          <span class="namec">MFMIN:</span> Minimum melt factor during non-rain periods (mm/deg C 6 hr) - in western facing slope assumed to occur on December 21 - value of 0.60 for the American River Basin from Shamir & Georgakakos 2007.<br />
+          <span class="namec">TIPM:</span> Model parameter (more than 0.0 and less than 1.0) - Anderson Manual recommends 0.1 to 0.2 for deep snowpack areas.<br />
+          <span class="namec">NMF:</span> Maximum negative melt factor (mm/deg C 6 hr) - value of 0.15 for the American River Basin from Shamir & Georgakakos 2007.<br />
+          <span class="namec">PLWHC:</span> Percent liquid water holding capacity of the snow pack - max is 0.4 - value of 0.04 for the American River Basin from Shamir & Georgakakos 2007.<br />
+          <span class="namec">SCF:</span> Snow Correction Factor.<br /><br />
           <li><a name="paramsi">Simple Inundation Parameter Set</a></li>
           <pre>
 [simpleinundationparamset rundu]
@@ -475,7 +475,8 @@ TIME_END=201006010030
 <em>MAXSTREAMFLOW</em>: Maximum streamflow during run (cms)
 <em>MAXSOILMOISTURE</em>: Maximum soil moisture during run (%)
 <em>MAXRETURNPERIOD</em>: Maximum return period during run (years)
-<em>MAXSNOWWATER</em>: Maximum snow water equivalent (mm)</pre>
+<em>MAXSNOWWATER</em>: Maximum snow water equivalent (mm)
+<em>MAXINUNDATION</em>: Maximum water depth during run (m). Based on MAXSTREAMFLOW</pre>
         <span class="namec">DA_FILE:</span> <em>(Optional)</em> The input observations to be added for use with streamflow data assimilation,<br />
         <span class="namec">CO_FILE:</span> <em>(Optional)</em> The combined output file if one is desired.<br />
         <span class="namec">RP_STDGRID:</span> <em>(Optional)</em> The geotiff file representing the standard deviation for the Log-Pearson Type III return period distribution.<br />
